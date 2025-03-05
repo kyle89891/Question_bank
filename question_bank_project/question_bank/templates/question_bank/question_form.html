@@ -1,0 +1,21 @@
+{% extends "question_bank/base.html" %}
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-10 offset-1">
+        <h4 class="text-center alert alert-info">Create Question</h4>
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ question_form.as_p }}
+            {{ option_forms.management_form }}
+            {% for form in option_forms %}
+                {{ form.as_p }}
+            {% endfor %}
+            <button type="submit">Submit</button>
+            <button><a href="{% url 'submit_answers' %}" >Back</a></button>
+        </form>
+
+{% endblock %}
+
+
+

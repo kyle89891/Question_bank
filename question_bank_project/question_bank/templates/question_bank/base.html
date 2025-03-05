@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'question_bank/css/bootstrap.css' %}">
+    <style>
+        /* Add custom styles here */
+        .question-card {
+            margin-bottom: 20px;
+        }
+        .question-card .card-body {
+            padding: 20px;
+        }
+        .question-card .card-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .question-card .list-group-item {
+            border: none;
+            padding: 10px;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center alert alert-success">Question Bank Application</h2>
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+
+    
+<script src="{% static 'question_bank/js/jquery.js' %}"></script>
+<script src="{% static 'question_bank/js/popper.js' %}"></script>
+<script src="{% static 'question_bank/js/bootstrap.js' %}"></script>
+</body>
+</html>

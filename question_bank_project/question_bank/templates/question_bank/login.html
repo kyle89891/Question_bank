@@ -1,0 +1,16 @@
+{% extends "question_bank/base.html" %}
+{% block content %}
+<div class="row">
+    <div class="text-center alert alert-info">
+        <h4 class="text-center alert alert-info">User Login</h4>
+    <form method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">Login</button>
+        <a href="{% url 'addshow' %}" class="btn btn-success btn-sm">Signup</a>  
+        
+    </form>
+</div>
+</div>
+
+{% endblock %}

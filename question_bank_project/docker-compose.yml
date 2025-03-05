@@ -1,0 +1,48 @@
+services:
+  mysql_db:
+    container_name: mysql_con
+    image: mysql:8.0
+    restart: always
+    ports:
+      - "3307:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=question_bank
+      - MYSQL_ROOT_USER=root
+      - MYSQL_ROOT_PASSWORD=akash
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+  phpmyadmin:
+    container_name: phpmyadmin_con
+    image: phpmyadmin
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: mysql_db
+      MYSQL_ROOT_PASSWORD: root
+    depends_on:
+      - mysql_db
+
+  django_project:
+    container_name: django_con
+    image: django-img
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8002:8002"
+    env_file:
+      - ".env"
+    volumes:
+      - .:/docksetup
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8002"
+    depends_on:
+      - mysql_db

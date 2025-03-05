@@ -1,0 +1,33 @@
+{% extends "question_bank/base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-sm-8 offset-2">
+        <h4 class="alert alert-info">
+            Update Question
+        </h4>
+        <form action="" method="POST">
+        {% csrf_token %}
+        {{ question_form.as_p }}
+        {{ option_forms.management_form }}
+        {% for form in option_forms %}
+        {{ form.as_p }}
+        {% endfor %}
+        <input type="submit" class="btn btn-success" value="Update">
+        <a href="{% url 'submit_answers' %}" class="btn btn-info">Back to Home</a>
+    </form>
+    </div>
+</div>
+{% endblock %}
+
+    <!-- <h1>Question Detail</h1>
+    <p>{{ question.qus }}</p>
+    <h4>Subject:</h4>
+    <p>{{ question.subject }}</p>
+    <h4>Options:</h4>
+    <ul>
+        {% for option in question.option_set.all %}
+            <li>{{ option.text }} ({{ option.is_correct }})</li>
+        {% endfor %}
+    </ul>-->
+
+
