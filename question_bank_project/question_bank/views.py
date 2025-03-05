@@ -180,10 +180,13 @@ def submit_answers(request):
                 total_marks += 1
             #print(total_marks)
             
-            incorrect=num_questions-total_marks
-
-            if not incorrect:
+            if num_questions<1:
                 incorrect=0
+            else:
+                incorrect=num_questions-total_marks
+
+            # if not incorrect:
+            # incorrect=0
 
             percentage=((total_marks/num_questions)*100)
 
