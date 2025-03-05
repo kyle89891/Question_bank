@@ -161,6 +161,8 @@ def submit_answers(request):
         #print(max_question_id)
 
         total_marks = 0
+        incorrect = 0  # Initialize `incorrect`
+        percentage = 0  # Initialize `percentage`
 
         # Iterate until the maximum question ID
         for question_id in range(1, max_question_id + 1):
@@ -180,15 +182,13 @@ def submit_answers(request):
                 total_marks += 1
             #print(total_marks)
             
-            if num_questions<1:
-                incorrect=0
-            else:
-                incorrect=num_questions-total_marks
-
-            # if not incorrect:
-            # incorrect=0
-
-            percentage=((total_marks/num_questions)*100)
+        # Avoid division by zero
+        if num_questions > 0:
+            incorrect = num_questions - total_marks
+            percentage = (total_marks / num_questions) * 100
+        else:
+            incorrect = 0
+            percentage = 0
 
         return render(request,'question_bank/result.html',{'total':num_questions,'correct':total_marks,
                                                            'wrong':incorrect,'percent':percentage,'score':total_marks})
